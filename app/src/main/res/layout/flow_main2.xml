@@ -1,0 +1,81 @@
+<luo.bing.com.bingproject.testView.FlowLayout2 xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+    <TextView
+        android:id="@+id/txtView"
+        android:text="@string/hello_world"
+        android:layout_width="wrap_content"
+        android:textSize="20sp"
+        android:layout_margin="5dp"
+        android:padding="10dp"
+        android:background="@android:color/holo_red_dark"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="sjlkjkljkljklj"
+        android:layout_width="100dp"
+        android:textSize="17sp"
+        android:padding="10dp"
+        android:layout_margin="6dp"
+        android:background="@android:color/holo_blue_bright"
+        android:layout_height="100dp"/>
+
+    <TextView
+        android:text="this  is one "
+        android:layout_width="wrap_content"
+        android:textSize="23sp"
+        android:padding="10dp"
+        android:layout_margin="6dp"
+        android:background="@android:color/holo_orange_dark"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="this is two"
+        android:layout_width="wrap_content"
+        android:textSize="30sp"
+        android:layout_margin="6dp"
+        android:padding="10dp"
+        android:background="@android:color/holo_blue_dark"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="@string/hello_world"
+        android:layout_width="wrap_content"
+        android:textSize="25sp"
+        android:layout_margin="6dp"
+        android:padding="10dp"
+        android:background="@android:color/holo_green_light"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="@string/hello_world"
+        android:layout_width="wrap_content"
+        android:textSize="35sp"
+        android:layout_margin="6dp"
+        android:padding="10dp"
+        android:background="@android:color/darker_gray"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="@string/hello_world"
+        android:layout_width="wrap_content"
+        android:textSize="32sp"
+        android:layout_margin="6dp"
+        android:padding="10dp"
+        android:background="@android:color/holo_purple"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="string_hello_world  play game"
+        android:layout_width="wrap_content"
+        android:textSize="37sp"
+        android:layout_margin="6dp"
+        android:padding="10dp"
+        android:background="@android:color/holo_blue_dark"
+        android:layout_height="wrap_content"/>
+
+
+
+</luo.bing.com.bingproject.testView.FlowLayout2>

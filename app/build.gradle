@@ -11,6 +11,11 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+
+        ndk{
+            moduleName "HelloNDK"
+            abiFilters "armeabi", "armeabi-v7a", "x86"
+        }
     }
     buildTypes {
         release {
@@ -18,6 +23,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+//    sourceSets.main {
+//        jni.srcDirs = [jni]
+//    }
 }
 
 dependencies {

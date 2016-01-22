@@ -59,4 +59,6 @@ public class NetworkResponse {
 
     /** True if the server returned a 304 (Not Modified). */
     public final boolean notModified;
+
+
 }
