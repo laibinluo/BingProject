@@ -1,1 +1,3 @@
-include ':app',':volleyLib'
+include ':app', ':volleyLib', ':xUtils'
+project(':xUtils').projectDir = new File('library')
+
