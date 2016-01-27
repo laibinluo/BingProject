@@ -1,3 +1,30 @@
 include ':app', ':volleyLib', ':xUtils'
 project(':xUtils').projectDir = new File('library')
 
+def initGradleEnvironment(){
+    println "initGradleEnvironment ... "
+    // init
+    Properties properties = new Properties()
+    File propertyFile = new File(rootDir.getAbsolutePath() + "/local.properties")
+
+    println "root.dir " + rootDir.getAbsolutePath()
+
+    properties.load(propertyFile.newDataInputStream())
+
+    gradle.ext.api = properties.getProperty("sdk.api")
+
+    gradle.ext.sdkDir = properties.getProperty('sdk.dir')
+    gradle.ext.ndkDir = properties.getProperty('ndk.dir')
+
+    gradle.ext.debugKeystore= properties.getProperty('debug.keystore')
+
+    println "sdk api " + gradle.api
+    println "initialize Gradle Environment completes..."
+}
+
+initGradleEnvironment()
+
+println "In posdevice, gradle id is " +gradle.hashCode()
+println "Home Dir:" + gradle.gradleHomeDir
+println "User Home Dir:" + gradle.gradleUserHomeDir
+println "Parent: " + gradle.parent

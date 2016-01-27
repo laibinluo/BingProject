@@ -1,0 +1,43 @@
+println "================utils.gradle begin ======================="
+
+def copyFile(String srcFile, destFile){
+
+}
+
+def rmFile(String targetFile){
+
+}
+
+
+def cleanOutput(boolean bJar = true){
+
+}
+
+
+def copyOutput(boolean bJar = true){
+
+}
+
+def getVersionNameAdvanced(){
+    def xmlFile = project.file("src\\main\\AndroidManifest.xml")
+    def rootMainfest = new XmlSlurper().parse(xmlFile)
+    return rootMainfest['@package']
+}
+
+def disableDebugBuild(){
+    def targetTastks = project.tasks.findAll {task -> task.name.contains("Debug")}
+
+    targetTastks.each {
+        println "disable debug task : ${it.name}"
+        it.setEnabled(false)
+    }
+}
+
+ext{
+    getVersionNameAdvanced = this.&getVersionNameAdvanced
+    copyFile = this.&copyFile
+    rmFile = this.&rmFile
+    cleanOutput = this.&cleanOutput
+    copyOutput = this.&copyOutput
+    disableDebugBuild = this.&disableDebugBuild
+}

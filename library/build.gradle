@@ -1,5 +1,11 @@
 apply plugin: 'android-library'
 
+println "===================== xUtils ============================"
+println "In posdevice, gradle id is " +gradle.hashCode()
+println "Home Dir:" + gradle.gradleHomeDir
+println "User Home Dir:" + gradle.gradleUserHomeDir
+println "Parent: " + gradle.parent
+
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
 }

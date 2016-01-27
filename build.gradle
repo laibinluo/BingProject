@@ -1,15 +1,27 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+println "===================== BingProject ============================"
+println "In posdevice, gradle id is " +gradle.hashCode()
+println "Home Dir:" + gradle.gradleHomeDir
+println "User Home Dir:" + gradle.gradleUserHomeDir
+println "Parent: " + gradle.parent
+
 
 buildscript {
     repositories {
+        ///jcenter是一个函数，表示编译过程中依赖的库，所需的插件可以在jcenter仓库中
+        //下载。
         jcenter()
     }
     dependencies {
+        //dependencies表示我们编译的时候，依赖android开发的gradle插件。插件对应的
+        //class path是com.android.tools.build。版本是1.2.3
         classpath 'com.android.tools.build:gradle:1.2.3'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+
+    //apply from: rootProject.getRootDir().getAbsolutePath() + "/utils.gradle"
 }
 
 allprojects {

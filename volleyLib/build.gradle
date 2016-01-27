@@ -1,4 +1,12 @@
 apply plugin: 'android-library'
+apply from: rootProject.getRootDir().getAbsolutePath() + "/utils.gradle"
+
+println "===================== volleyLib ============================"
+println "In posdevice, gradle id is " +gradle.hashCode()
+println "Home Dir:" + gradle.gradleHomeDir
+println "User Home Dir:" + gradle.gradleUserHomeDir
+println "Parent: " + gradle.parent
+println "gradle.api : " + gradle.api
 
 android {
     compileSdkVersion 21
@@ -27,9 +35,45 @@ android {
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
     }
+
+    lintOptions{
+        abortOnError false
+    }
+}
+
+
+clean.dependsOn 'VolleyCleanTask'
+
+task VolleyCleanTask << {
+    cleanOutput(true)
+}
+
+//前面说了，我要把jar包拷贝到指定的目录。对于Android编译，我一般指定gradle assemble
+//它默认编译debug和release两种输出。所以，下面这个段代码表示：
+//tasks代表一个Projects中的所有Task，是一个容器。getByName表示找到指定名称的任务。
+//我这里要找的assemble任务，然后我通过doLast添加了一个Action。这个Action就是copy
+//产出物到我设置的目标目录中去
+tasks.getByName('assemble'){
+    it.doLast{
+        println "$project.name: After assemble, jar libs are copied tolocal repository"
+        copyOutput(true)
+    }
+}
+
+/*
+  因为我的项目只提供最终的release编译出来的Jar包给其他人，所以不需要编译debug版的东西
+  当Project创建完所有任务的有向图后，我通过afterEvaluate函数设置一个回调Closure。在这个回调
+  Closure里，我disable了所有Debug的Task
+*/
+project.afterEvaluate{
+    disableDebugBuild()
 }
 
 dependencies {
     provided fileTree(dir: 'libs', include: '*.jar')
     //compile fileTree(dir: 'libs', include: '*.jar')
 }
+
+
+
+

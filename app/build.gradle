@@ -1,4 +1,12 @@
 apply plugin: 'com.android.application'
+apply from: rootProject.getRootDir().getAbsolutePath() + "/utils.gradle"
+
+println "===================== app ============================"
+println "In posdevice, gradle id is " +gradle.hashCode()
+println "Home Dir:" + gradle.gradleHomeDir
+println "User Home Dir:" + gradle.gradleUserHomeDir
+println "Parent: " + gradle.parent
+println "rootProject path : " + rootProject.getRootDir().getAbsolutePath()
 
 android {
     compileSdkVersion 21
@@ -22,11 +30,49 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+//        debug {
+//            signingConfig signingConfig.debug
+//            jniDebuggable false
+//        }
     }
 
-//    sourceSets.main {
-//        jni.srcDirs = [jni]
+    signingConfigs {
+        debug {
+//            if (project.gradle.debugKeystore != null){
+//                storeFile file("file://${project.gradle.debugKeystore}")
+//                storePassword "android"
+//                keyAlias "androiddebugkey"
+//                keyPassword "android"
+//            }
+        }
+    }
+
+//    repositories{
+//        flatDir {
+//            //flatDir：告诉gradle，编译中依赖的jar包存储在dirs指定的目录
+//            name "minsheng-gradle-local-repository"
+//            dirsgradle.LOCAL_JAR_OUT //LOCAL_JAR_OUT是我存放编译出来的jar包的位置
+//        }
 //    }
+
+}
+
+tasks.getByName("assemble"){
+    doFirst{
+        println "tasks.getByName(\"assemble\") frist ~~~~~~~~~~~~~~"
+    }
+    doLast{
+        println "$project.name: After assemble, jar libs are copied tolocal repository"
+        //copyOutput是utils.gradle输出的closure
+        //copyOutput(true)
+        println "$project.getVersionNameAdvanced : test "
+        println "$android.defaultConfig.versionName : test"
+
+        project.ext.versionName = android.defaultConfig.versionName
+        println "\t versionName = $versionName"
+        copyOutput(false)
+    }
 }
 
 dependencies {
