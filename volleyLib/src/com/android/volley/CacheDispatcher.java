@@ -17,6 +17,7 @@
 package com.android.volley;
 
 import android.os.Process;
+import android.util.Log;
 
 import java.util.concurrent.BlockingQueue;
 
@@ -91,6 +92,8 @@ public class CacheDispatcher extends Thread {
                 final Request request = mCacheQueue.take();
                 request.addMarker("cache-queue-take");
 
+                Log.d("bingluo", "mCacheQueue take ======begin====");
+
                 // If the request has been canceled, don't bother dispatching it.
                 if (request.isCanceled()) {
                     request.finish("cache-discard-canceled");
@@ -108,6 +111,7 @@ public class CacheDispatcher extends Thread {
 
                 // If it is completely expired, just send it to the network.
                 if (entry.isExpired()) {
+                    Log.d("bingluo", "entry.isExpired======true====");
                     request.addMarker("cache-hit-expired");
                     request.setCacheEntry(entry);
                     mNetworkQueue.put(request);
@@ -121,6 +125,7 @@ public class CacheDispatcher extends Thread {
                 request.addMarker("cache-hit-parsed");
 
                 if (!entry.refreshNeeded()) {
+                    Log.d("bingluo", "entry.refreshNeeded======flase====");
                     // Completely unexpired cache hit. Just deliver the response.
                     mDelivery.postResponse(request, response);
                 } else {
@@ -140,6 +145,7 @@ public class CacheDispatcher extends Thread {
                         public void run() {
                             try {
                                 mNetworkQueue.put(request);
+
                             } catch (InterruptedException e) {
                                 // Not much we can do about this.
                             }

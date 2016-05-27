@@ -10,7 +10,7 @@ println "gradle.api : " + gradle.api
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "23.0.0 rc2"
+    buildToolsVersion "21.1.2"
 
     sourceSets {
         main {

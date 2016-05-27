@@ -16,6 +16,8 @@
 
 package com.android.volley.toolbox;
 
+import android.util.Log;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Request.Method;
@@ -122,6 +124,7 @@ public class HurlStack implements HttpStack {
                 response.addHeader(h);
             }
         }
+        Log.d("bingluo", "HurlStack  performRequest response : " + response.toString());
         return response;
     }
 

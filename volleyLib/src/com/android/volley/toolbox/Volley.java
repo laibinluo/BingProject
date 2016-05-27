@@ -24,6 +24,7 @@ import android.os.Build;
 
 import com.android.volley.Network;
 import com.android.volley.RequestQueue;
+import com.android.volley.VolleyLog;
 
 import java.io.File;
 
@@ -47,6 +48,7 @@ public class Volley {
             String packageName = context.getPackageName();
             PackageInfo info = context.getPackageManager().getPackageInfo(packageName, 0);
             userAgent = packageName + "/" + info.versionCode;
+
         } catch (NameNotFoundException e) {
         }
 

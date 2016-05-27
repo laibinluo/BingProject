@@ -17,6 +17,7 @@
 package com.android.volley.toolbox;
 
 import android.os.SystemClock;
+import android.util.Log;
 
 import com.android.volley.Cache;
 import com.android.volley.VolleyLog;
@@ -143,13 +144,14 @@ public class DiskBasedCache implements Cache {
             }
             return;
         }
-
+        Log.d("bingluo", "mRootDirectory volley : " + mRootDirectory.getAbsolutePath());
         File[] files = mRootDirectory.listFiles();
         if (files == null) {
             return;
         }
         for (File file : files) {
             FileInputStream fis = null;
+            Log.d("bingluo", "file volley : " + file.getName());
             try {
                 fis = new FileInputStream(file);
                 CacheHeader entry = CacheHeader.readHeader(fis);

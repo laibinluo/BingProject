@@ -12,7 +12,7 @@ public class HelloNDK {
         System.loadLibrary("HelloNDK");
     }
 
-    public String javaSayHello(){
+    public String javaSayHellzo(){
         Log.d(TAG,  "javaSayHello ====");
         return sayHello();
     }

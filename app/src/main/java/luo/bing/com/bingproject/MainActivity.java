@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -20,6 +21,10 @@ import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLEncoder;
+
 import luo.bing.com.bingproject.ndk_demo.HelloNDK;
 import luo.bing.com.bingproject.volley.VolleySingleton;
 
@@ -27,19 +32,20 @@ import luo.bing.com.bingproject.volley.VolleySingleton;
 public class MainActivity extends ActionBarActivity {
     private Context mContext;
     private ImageView mImgView;
+    TextView txtView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
-        setContentView(R.layout.flow_main2);
+        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.flow_main2);
         mContext = getApplicationContext();
 
-        TextView txtView = (TextView) findViewById(R.id.txtView);
+        txtView = (TextView) findViewById(R.id.txtView);
         HelloNDK helloNDK = new HelloNDK();
-        txtView.setText(helloNDK.javaSayHello());
-
-//        testImageView();
+        //txtView.setText(helloNDK.javaSayHello());
+        testImageView();
+        //testJson();
 //
 //        Toast.makeText(this.getApplicationContext(), "boot time : " + ConfigUtils.getBootTime(this.getApplicationContext()), Toast.LENGTH_LONG).show();
     }
@@ -103,12 +109,23 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void testJson(){
-        String url = "http://pipes.yahooapis.com/pipes/pipe.run?_id=giWz8Vc33BG6rQEQo_NLYQ&_render=json";
+        String url = "";
+//        try {
+//            url = "http://api.map.baidu.com/telematics/v3/weather?location=%E4%B8%8A%E6%B5%B7&output=json&ak=D6607d3e2d2408a7a98ee44ec519f8cc";
+//           //  url = "http://cloud.ijidou.com/radio/list.api?&city="+  URLEncoder.encode("上海", "UTF-8")  + "&modulation=FM&type=car";
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+        //url = "https://www.baidu.com/";
+        url = "http://api.map.baidu.com/telematics/v3/weather?location=%E4%B8%8A%E6%B5%B7&output=json&ak=D6607d3e2d2408a7a98ee44ec519f8cc";
+        // String url = "http://pipes.yahooapis.com/pipes/pipe.run?_id=giWz8Vc33BG6rQEQo_NLYQ&_render=json";
         final ProgressDialog pd = ProgressDialog.show(this, "Please Wait...", "Please Wait...");
-        JsonObjectRequest jr = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
+
+        StringRequest jr = new StringRequest(Request.Method.GET, url, new Response.Listener<String>(){
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(String response) {
                 Toast.makeText(mContext, "success", Toast.LENGTH_LONG).show();
+                txtView.setText(response);
                 pd.dismiss();
             }
         }, new Response.ErrorListener(){
@@ -119,6 +136,13 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+
         VolleySingleton.getVolleySingleton(mContext).addToRequestQueue(jr);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("bingluo", "onDestroy");
     }
 }

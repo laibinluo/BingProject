@@ -17,6 +17,7 @@
 package com.android.volley.toolbox;
 
 import android.os.SystemClock;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
@@ -51,7 +52,7 @@ import java.util.Map;
  * A network performing Volley requests over an {@link HttpStack}.
  */
 public class BasicNetwork implements Network {
-    protected static final boolean DEBUG = VolleyLog.DEBUG;
+    protected static final boolean DEBUG = true;
 
     private static int SLOW_REQUEST_THRESHOLD_MS = 3000;
 
@@ -82,6 +83,9 @@ public class BasicNetwork implements Network {
     @Override
     public NetworkResponse performRequest(Request<?> request) throws VolleyError {
         long requestStart = SystemClock.elapsedRealtime();
+
+        Log.d("bingluo", "performRequest ====================begin=======");
+
         while (true) {
             HttpResponse httpResponse = null;
             byte[] responseContents = null;
@@ -89,9 +93,18 @@ public class BasicNetwork implements Network {
             try {
                 // Gather headers.
                 Map<String, String> headers = new HashMap<String, String>();
+
+                for (Map.Entry<String, String> entry: headers.entrySet()){
+                    Log.d("bingluo", "entry : " + entry.toString());
+                }
+
+                Log.d("bingluo", "BasicNetwork request : " + request.toString());
+
                 addCacheHeaders(headers, request.getCacheEntry());
+
                 httpResponse = mHttpStack.performRequest(request, headers);
                 StatusLine statusLine = httpResponse.getStatusLine();
+
                 int statusCode = statusLine.getStatusCode();
 
                 responseHeaders = convertHeaders(httpResponse.getAllHeaders());
@@ -149,7 +162,8 @@ public class BasicNetwork implements Network {
     private void logSlowRequests(long requestLifetime, Request<?> request,
             byte[] responseContents, StatusLine statusLine) {
         if (DEBUG || requestLifetime > SLOW_REQUEST_THRESHOLD_MS) {
-            VolleyLog.d("HTTP response for request=<%s> [lifetime=%d], [size=%s], " +
+
+            VolleyLog.d("bingluo HTTP response for request=<%s> [lifetime=%d], [size=%s], " +
                     "[rc=%d], [retryCount=%s]", request, requestLifetime,
                     responseContents != null ? responseContents.length : "null",
                     statusLine.getStatusCode(), request.getRetryPolicy().getCurrentRetryCount());
@@ -188,6 +202,7 @@ public class BasicNetwork implements Network {
 
         if (entry.serverDate > 0) {
             Date refTime = new Date(entry.serverDate);
+            Log.d("bingluo", "addCacheHeaders : " + refTime.toString());
             headers.put("If-Modified-Since", DateUtils.formatDate(refTime));
         }
     }
@@ -235,6 +250,8 @@ public class BasicNetwork implements Network {
         for (int i = 0; i < headers.length; i++) {
             result.put(headers[i].getName(), headers[i].getValue());
         }
+
+        Log.d("bingluo ", "convertHeaders : " + result.toString());
         return result;
     }
 }

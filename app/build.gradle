@@ -10,7 +10,7 @@ println "rootProject path : " + rootProject.getRootDir().getAbsolutePath()
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "23.0.0 rc2"
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "luo.bing.com.bingproject"
@@ -56,6 +56,13 @@ android {
 //        }
 //    }
 
+
+
+    dexOptions {
+        incremental = true;
+        preDexLibraries = false
+        javaMaxHeapSize "4g" // 2g should be also OK
+    }
 }
 
 tasks.getByName("assemble"){
@@ -76,9 +83,8 @@ tasks.getByName("assemble"){
 }
 
 dependencies {
-    provided  fileTree(dir: 'libs', include: ['*.jar'])
-    //compile  fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.1.1'
     compile project(':volleyLib')
 
 }

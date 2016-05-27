@@ -19,6 +19,7 @@ package com.android.volley;
 import android.net.TrafficStats;
 import android.os.Build;
 import android.os.Process;
+import android.util.Log;
 
 import java.util.concurrent.BlockingQueue;
 
@@ -85,6 +86,8 @@ public class NetworkDispatcher extends Thread {
                 }
                 continue;
             }
+
+            Log.d("bingluo", "NetWork Queue take ======begin====");
 
             try {
                 request.addMarker("network-queue-take");
