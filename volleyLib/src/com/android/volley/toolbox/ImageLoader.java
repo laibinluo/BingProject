@@ -19,6 +19,7 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.android.volley.Request;
@@ -189,6 +190,8 @@ public class ImageLoader {
         throwIfNotOnMainThread();
 
         final String cacheKey = getCacheKey(requestUrl, maxWidth, maxHeight);
+
+        Log.d("bingluo", "ImageLoader cacheKey : " + cacheKey);
 
         // Try to look up the request in the cache of remote images.
         Bitmap cachedBitmap = mCache.getBitmap(cacheKey);

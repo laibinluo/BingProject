@@ -1,10 +1,12 @@
 package luo.bing.com.bingproject.volley;
 
+import java.io.Serializable;
+
 /**
  * Created by bingluo on 2016/5/27.
  *
  */
-public class Info {
+public class Info implements Serializable{
     private String mUrl;
 
     public Info(String url){
@@ -16,6 +18,10 @@ public class Info {
     }
 
     public void setUrl(String url){
+        int x = 123;
+
         mUrl = url;
     }
+
+
 }

@@ -5,7 +5,7 @@ import android.util.Log;
 import luo.bing.com.bingproject.BuildConfig;
 
 public class LogUtils {
-	private static final String TAG = "Radio";
+	private static final String TAG = "test bingluo";
 	public final static boolean DEBUG = BuildConfig.DEBUG;
 
 	public static void v(String log) {

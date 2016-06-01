@@ -34,7 +34,6 @@ public class VolleyActivity extends ActionBarActivity {
 
 
     private void init(){
-
         Info info1 = new Info("http://imgstatic.baidu.com/img/image/shouye/fanbingbing.jpg");
         Info info2 = new Info("http://imgstatic.baidu.com/img/image/shouye/liuyifei.jpg");
         Info info3 = new Info("http://imgstatic.baidu.com/img/image/shouye/wanglihong.jpg");
