@@ -70,8 +70,6 @@ public class CustomImgContainer extends ViewGroup{
             if (i == 2 || i == 3 ){
                 bSize += childWidth + params.leftMargin + params.rightMargin;
             }
-
-
         }
 
         widthTotal = Math.max(tSize, bSize);
